@@ -1,0 +1,77 @@
+/* 마음껏 꾸며 너의 꿈을 펼쳐봐 */
+.code-area {
+  font-size: 16px;
+  display: flex;
+
+  textarea {
+    resize: none;
+    border: 0;
+    font-size: inherit;
+  }
+
+  #line-number {
+    width: 2%;
+    font-weight: 600;
+    background-color: rgb(189, 189, 89);
+    pointer-events: none;
+    white-space: pre;
+    overflow: hidden;
+    resize: none;
+    text-align: right; 
+  }
+
+  #input-code {
+    box-sizing: border-box;
+    padding-left: 10px;
+    background-color: #1d2433;
+    color: white;
+    width: 98%;
+  }
+
+  .input-code:focus {
+    outline: none;
+  }
+}
+
+.exe-result {
+  background-color: #171c28;
+
+  .exe-card {
+    color: #fdfdfd;
+  }
+}
+
+/* 테이블 */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.result-table th,
+.result-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+.result-table th {
+  background-color: #fafafa;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+.result-table td {
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.result-table td:nth-child(1) {
+  text-align: left;
+}
+
+.result-table td:nth-child(2) {
+  text-align: left;
+}
+
+.result-table td:nth-child(3),
+.result-table td:nth-child(4) {
+  text-align: left;
+}
