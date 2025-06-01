@@ -10,12 +10,13 @@ const lines = document.getElementById("line-number");
 const submitBtn = document.getElementById("submitBtn");
 const resultTableBody = document.getElementById("result-table-body");
 
-
-
-
 // 문제 데이터
-const input = [[10, [9, 19, 20, 50, 80, 50, 20, 140]]];
-const expectiveValue = [398];
+const input = [
+  [10, [9, 19, 20, 50, 80, 50, 20, 140]],
+  [10, [1, 1, 1, 18, 1, 20, 1, 1, 1, 100]],
+  [5, [10, 3, 2, 8, 1, 6, 1, 4, 2, 5]],
+];
+const expectiveValue = [398, -1, -1];
 
 //DOM Load되었을 때 실행
 document.addEventListener("DOMContentLoaded", () => {
@@ -28,9 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //제출, 실행
 submitBtn.addEventListener("click", (e) => {
-  const wrappedCode = `(str, weed) => { ${codeEditor.value} }`;
-  const solution = new Function("return " + wrappedCode)();
-  solve(solution);
+  try {
+    const wrappedCode = `(str, weed) => { ${codeEditor.value} }`;
+    const solution = new Function("return " + wrappedCode)();
+    solve(solution);
+  } catch (err) {
+    outputTr.children[3].textContent = err;
+  }
 });
 
 //textarea keydown 설정
@@ -64,8 +69,8 @@ codeEditor.addEventListener("keydown", function (e) {
 });
 
 // 스크롤 동기화
-code.addEventListener("scroll", () => {
-  lines.scrollTop = code.scrollTop;
+codeEditor.addEventListener("scroll", () => {
+  lines.scrollTop = codeEditor.scrollTop;
   console.log(lines.scrollTop);
 });
 
@@ -81,7 +86,7 @@ function solve(callback) {
   };
 
   for (let i = 0; i < input.length; i++) {
-    let outputTd = resultTableBody.children[i];
+    let outputTr = resultTableBody.children[i];
     output = "";
     let result = 0;
 
@@ -91,10 +96,18 @@ function solve(callback) {
       output += "[에러] : \n" + err;
     }
 
-    outputTd.children[0].textContent = JSON.stringify(input[i]);
-    outputTd.children[1].textContent = expectiveValue[i];
-    outputTd.children[2].textContent = result;
-    outputTd.children[3].textContent = output;
+    outputTr.children[0].textContent = JSON.stringify(input[i]);
+    outputTr.children[1].textContent = expectiveValue[i];
+    outputTr.children[2].textContent = result;
+    outputTr.children[3].textContent = output;
+    outputTr.classList.remove("success", "fail");
+    if (expectiveValue[i] === result) {
+      outputTr.classList.add("success");
+      outputTr.children[4].textContent = "정답!";
+    } else {
+      outputTr.classList.add("fail");
+      outputTr.children[4].textContent = "실패";
+    }
   }
 
   //원본으로 되돌리기

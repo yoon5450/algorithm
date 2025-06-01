@@ -15,13 +15,14 @@ export function solution() {
   let str = 10;
   let weed = [9, 19, 20, 50, 80, 50, 20, 140];
 
-  weed.forEach((el) => {
-    if (str >= el) {
-      str += el;
+  for(let i = 0; i < weed.length; i++){
+    if (str >= weed[i]) {
+      str += weed[i];
     } else {
-      console.log(-1);
+       str = -1;
+       break;
     }
-  });
-
+  };
+  
   return str;
 }

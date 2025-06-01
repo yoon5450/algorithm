@@ -15,12 +15,18 @@
     <p>👇 아래의 콘솔창을 열어 결과를 확인해보세요 👇</p>
     <input type="button" id="submitBtn" value="제출하기" />
     <div class="code-area">
-      <textarea id="line-number" readonly rows="30">
-      </textarea>
+      <textarea id="line-number" readonly rows="30"> </textarea>
       <textarea id="input-code" rows="30">
-  let result = 0;
-
-  return result;
+  for(let i = 0; i < weed.length; i++){
+    if (str >= weed[i]) {
+      str += weed[i];
+    } else {
+       str = -1;
+       break;
+    }
+  };
+  
+  return str;
 </textarea
       >
     </div>
@@ -33,26 +39,30 @@
           <th>기댓값</th>
           <th>실행 결과</th>
           <th>출력</th>
+          <th>채점 결과</th>
         </tr>
       </thead>
       <tbody id="result-table-body">
-        <tr>
+        <tr class="result-body-tr">
           <td>test</td>
           <td>test</td>
           <td>test</td>
           <td>test</td>
+          <td>score</td>
         </tr>
-        <tr>
+        <tr class="result-body-tr">
           <td>test</td>
           <td>test</td>
           <td>test</td>
           <td>test</td>
+          <td>score</td>
         </tr>
-        <tr>
+        <tr class="result-body-tr">
           <td>test</td>
           <td>test</td>
           <td>test</td>
           <td>test</td>
+          <td>score</td>
         </tr>
       </tbody>
     </table>
