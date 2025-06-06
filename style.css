@@ -1,47 +1,160 @@
 /* 마음껏 꾸며 너의 꿈을 펼쳐봐 */
-.code-area {
+
+body {
+  font-family: 'Pretendard Variable', Pretendard, -apple-system,
+    BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI',
+    'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #1e1e1e;
+}
+
+/* 헤더 영역 */
+/* 아. space-between 아이템 크기 다르니까 서로 거리 이상해져서 미치겠네 */
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #282c34;
+  color: #fdfdfd;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
+  gap: 20%;
+}
+
+/* 오버레이 영역 */
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+#overlay.hidden {
+  display: none;
+}
+
+#result-modal {
+  width: 40%;
+  height: 30%;
+  position: relative;
+  background: rgb(24, 24, 24);
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+  color: #fdfdfd;
+}
+
+#overlay h2 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+#overlay-close-btn {
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #aaa;
+  transition: color 0.2s;
+}
+
+#overlay-close-btn:hover {
+  color: #555;
+}
+
+/* 코드 에디터 영역 */
+
+.editor-area {
   font-size: 16px;
   display: flex;
+  margin-bottom: 20px;
+  height: 60vh;
+}
 
-  textarea {
-    resize: none;
-    border: 0;
-    font-size: inherit;
-  }
+.editor-area textarea {
+  resize: none;
+  border: 0;
+  font-size: inherit;
+}
 
-  #line-number {
-    width: 2%;
-    font-weight: 600;
-    background-color: rgb(189, 189, 89);
-    pointer-events: none;
-    white-space: pre;
-    overflow: hidden;
-    resize: none;
-    text-align: right; 
-  }
+.editor-area #line-number {
+  width: 2%;
+  font-weight: 600;
+  background-color: rgb(189, 189, 89);
+  pointer-events: none;
+  white-space: pre;
+  overflow: hidden;
+  resize: none;
+  text-align: right;
+}
 
-  #input-code {
-    box-sizing: border-box;
-    padding-left: 10px;
-    background-color: #1d2433;
-    color: white;
-    width: 98%;
-  }
+.editor-area #input-code {
+  box-sizing: border-box;
+  padding-left: 10px;
+  background-color: #1d2433;
+  color: white;
+  width: 98%;
+}
 
-  .input-code:focus {
-    outline: none;
-  }
+.editor-area .input-code:focus {
+  outline: none;
+}
+
+#submitBtn {
+  width: 100px;
+  height: 30px;
+  margin: 0.3rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: #7bc4ff;
+  color: #fdfdfd;
+  cursor: pointer;
 }
 
 .exe-result {
   background-color: #171c28;
+}
 
-  .exe-card {
-    color: #fdfdfd;
+.exe-card {
+  color: #fdfdfd;
+}
+
+@media (max-width: 768px) {
+  #line-number {
+    display: none;
+  }
+
+  #input-code {
+    width: 100%;
   }
 }
 
-/* 테이블 */
+/* 결과 테이블 */
 .result-table {
   width: 100%;
   border-collapse: collapse;
@@ -56,8 +169,8 @@
 .result-table th,
 .result-table td {
   padding: 10px 12px;
-  text-align: center;
-  border:#fafafa solid 1px;
+  text-align: left;
+  border: #fafafa solid 1px;
   white-space: pre-wrap;
   border-bottom: 1px solid #e0e0e0;
 }
@@ -72,7 +185,7 @@
 .result-table td {
   font-size: 14px;
   vertical-align: middle;
-  word-break:break-all;
+  word-break: break-all;
 }
 
 .result-table td:nth-child(1) {
@@ -91,17 +204,22 @@
   width: 30%;
 }
 
-.result-table td:nth-child(5){
+.result-table td:nth-child(5) {
   text-align: center;
   width: 10%;
+  min-width: 60px;
 }
 
-.fail{
+.result-table th:nth-child(5) {
+  text-align: center;
+}
+
+.fail {
   background-color: #f12c60;
   color: #fdfdfd;
 }
 
-.success{
+.success {
   background-color: dodgerblue;
   color: #fdfdfd;
 }
